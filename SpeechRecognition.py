@@ -13,21 +13,20 @@ class SpeechRecognition:
             audio = r.record(source)
         return audio
 
-    def recognize_sphinix_from_audio(self):
+    def recognize_sphinix_from_audio(self, key=None):
         ''' use sphinx to recognize text from voice '''
         try:
             return (sr.Recognizer().recognize_sphinx(audio_data=self.convert_to_audio(), language="en-US"))
         except Exception as ex:
             print("Sphinx error; {0}".format(ex))
 
-    def recognize_google_from_audio(self):
-        GOOGLE_API_KEY="AIzaSyA8SEIFogNEDM8vdhufYB85m6pqwFKEa1I"
+    def recognize_google_from_audio(self, key=None):
         try:
             return (sr.Recognizer().recognize_google(audio_data = self.convert_to_audio(), language="en-US"))
         except Exception as ex:
             print ("Google error; {0}".format(ex))
 
-    def get_text_from_audio(self, audio_path):
+    def get_text_from_audio(self, audio_path, key=None):
         ''' returns the text from voice from thevoice sample at path '''
         self.AUDIO_FILE = path.join(path.dirname(path.realpath(__file__)),audio_path)
         return self.recognize_sphinix_from_audio()
